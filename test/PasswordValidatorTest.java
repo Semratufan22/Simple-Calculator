@@ -2,8 +2,7 @@
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class PasswordValidatorTest {
 
@@ -22,12 +21,36 @@ public class PasswordValidatorTest {
         assertTrue(validator.validate("P@ssw0rd"), "Password should be en least 8\");\n" +
                 "    }");
     }
-    @Test
-    public void testPasswordIsTooLong(){
-        assertTrue(validator.validate("P@ssw0rd1j"),"Password should be less than 8\");\n" +
-                    "    }");
-    }
-    @Test  void testPasswordIsNull(){
 
+    @Test
+    public void testPasswordIsTooLong() {
+        assertTrue(validator.validate("P@ssw0rd1j"), "Password should be less than 8\");\n" +
+                "    }");
+    }
+
+    @Test
+    void testPasswordIsNull() {
+        //Arrange
+        PasswordValidator passwoord = new PasswordValidator();
+        //Act
+        Boolean result = passwoord.validate(null); // Pass null as input
+        //Assert
+        assertFalse(validator.validate(" "), "Password invalid\");\n" +
+                "    }");
+    }
+    @Test
+    public void testPasswordWithoutLetters() {
+        assertFalse(validator.validate("2@46806214"), "Password should include letters\");\n" +
+                "    }");
+    }
+    @Test
+    public void testPasswordWithoutDigits() {
+        assertFalse(validator.validate("P@sswhrddj"), "Password should include digits\");\n" +
+                "    }");
+    }
+    @Test
+    public void testPasswordWithoutSpecialCharacters() {
+        assertFalse(validator.validate("Phssw0rd1"), "Password should include a special char\");\n" +
+                "    }");
     }
 }
